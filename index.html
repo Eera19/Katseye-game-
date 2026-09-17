@@ -1,1 +1,1212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KATSEYE — Dream Debut</title>
 
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --pink:#ff79c8;
+  --purple:#8d5cff;
+  --deep:#120821;
+  --card:#211235;
+  --white:#fff;
+}
+
+body{
+  margin:0;
+  color:white;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%,#ff8bd533,transparent 30%),
+    radial-gradient(circle at 80% 20%,#8d5cff44,transparent 35%),
+    linear-gradient(145deg,#120821,#28104d 55%,#120821);
+  min-height:100vh;
+}
+
+button{
+  font:inherit;
+  border:0;
+  cursor:pointer;
+}
+
+#app{
+  min-height:100vh;
+  padding:18px;
+}
+
+.screen{
+  width:min(960px,100%);
+  min-height:calc(100vh - 36px);
+  margin:auto;
+  position:relative;
+}
+
+.hud{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.pill{
+  padding:8px 13px;
+  border:1px solid #ffffff33;
+  background:#ffffff12;
+  border-radius:999px;
+  font-weight:800;
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  text-align:center;
+  margin-top:25px;
+}
+
+.logo h1{
+  margin:0;
+  font-size:clamp(48px,12vw,92px);
+  letter-spacing:8px;
+  line-height:.9;
+  text-shadow:0 8px 30px #0008;
+}
+
+.logo .spark{
+  color:#ff9fdb;
+}
+
+.subtitle{
+  margin-top:12px;
+  letter-spacing:4px;
+  opacity:.8;
+  font-weight:700;
+}
+
+.members{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+  margin:30px auto;
+}
+
+.member{
+  text-align:center;
+  font-weight:800;
+  font-size:14px;
+}
+
+.avatar{
+  height:190px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  overflow:visible;
+}
+
+.body{
+  width:70px;
+  height:105px;
+  border-radius:35px 35px 16px 16px;
+  position:absolute;
+  bottom:0;
+  z-index:1;
+}
+
+.head{
+  width:66px;
+  height:70px;
+  border-radius:50%;
+  position:absolute;
+  top:43px;
+  z-index:2;
+  border:2px solid #ffffff30;
+}
+
+.hair{
+  width:78px;
+  height:82px;
+  background:#211526;
+  border-radius:48% 52% 40% 42%;
+  position:absolute;
+  top:29px;
+  z-index:3;
+}
+
+.hair.bob{
+  width:76px;
+  height:74px;
+  border-radius:48% 52% 35% 35%;
+}
+
+.hair.long{
+  width:84px;
+  height:112px;
+  border-radius:48% 52% 35% 35%;
+}
+
+.hair.ponytail{
+  width:78px;
+  height:80px;
+}
+
+.hair.ponytail:after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:70px;
+  right:-21px;
+  top:5px;
+  background:#211526;
+  border-radius:50%;
+  transform:rotate(-12deg);
+}
+
+.hair.waves{
+  width:84px;
+  height:90px;
+  border-radius:45% 55% 48% 45%;
+  box-shadow:7px 12px 0 #211526,-7px 10px 0 #211526;
+}
+
+.hair.bangs:before{
+  content:"";
+  position:absolute;
+  left:8px;
+  right:8px;
+  bottom:27px;
+  height:30px;
+  background:#211526;
+  border-radius:0 0 45% 45%;
+}
+
+.face{
+  position:absolute;
+  z-index:4;
+  top:67px;
+  width:55px;
+  height:25px;
+}
+
+.face:before,
+.face:after{
+  content:"•";
+  position:absolute;
+  font-size:17px;
+}
+
+.face:before{left:7px}
+.face:after{right:7px}
+
+.home-card{
+  background:#ffffff0d;
+  border:1px solid #ffffff20;
+  border-radius:30px;
+  padding:20px;
+  backdrop-filter:blur(15px);
+}
+
+.menu{
+  display:grid;
+  gap:12px;
+  max-width:600px;
+  margin:20px auto;
+}
+
+.big{
+  width:100%;
+  padding:17px 20px;
+  border-radius:18px;
+  color:white;
+  background:linear-gradient(135deg,#ff79c8,#8d5cff);
+  font-weight:900;
+  font-size:16px;
+  box-shadow:0 10px 25px #0004;
+}
+
+.big.secondary{
+  background:#ffffff12;
+  border:1px solid #ffffff25;
+}
+
+.big:active,
+.choice:active,
+.item:active{
+  transform:scale(.98);
+}
+
+.card{
+  background:#1b0e2ceF;
+  border:1px solid #ffffff20;
+  border-radius:28px;
+  padding:24px;
+  margin:25px auto;
+  max-width:800px;
+  box-shadow:0 20px 60px #0005;
+}
+
+.card h2{
+  margin-top:0;
+}
+
+.choices{
+  display:grid;
+  gap:11px;
+  margin-top:20px;
+}
+
+.choice{
+  padding:16px;
+  border-radius:17px;
+  background:#fff;
+  color:#281039;
+  text-align:left;
+  font-weight:750;
+}
+
+.result{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+  padding:20px;
+  border-radius:18px;
+  background:#ffffff10;
+  margin-bottom:15px;
+}
+
+.tabs{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  padding-bottom:5px;
+}
+
+.tab{
+  white-space:nowrap;
+  padding:9px 14px;
+  border-radius:999px;
+  color:white;
+  background:#ffffff12;
+}
+
+.tab.active{
+  background:#ff79c8;
+  color:#2b103e;
+}
+
+.dress-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+  margin-top:15px;
+}
+
+.item{
+  padding:13px;
+  border-radius:15px;
+  background:#ffffff0d;
+  border:1px solid #ffffff20;
+  color:white;
+  text-align:left;
+}
+
+.item.selected{
+  outline:3px solid #ff79c8;
+  background:#ff79c822;
+}
+
+/* DRESS-UP CHARACTER */
+
+.preview{
+  height:300px;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 50% 20%,#ffffff44,transparent 30%),
+    linear-gradient(145deg,#ffb8e8,#8e72ff);
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.doll{
+  width:150px;
+  height:270px;
+  position:relative;
+}
+
+.doll-body{
+  position:absolute;
+  bottom:15px;
+  left:37px;
+  width:76px;
+  height:125px;
+  background:#ff8fcb;
+  border-radius:38px 38px 18px 18px;
+  z-index:1;
+}
+
+.doll-head{
+  position:absolute;
+  top:55px;
+  left:42px;
+  width:66px;
+  height:72px;
+  background:#d99b78;
+  border-radius:50%;
+  z-index:2;
+}
+
+.doll-hair{
+  position:absolute;
+  top:40px;
+  left:35px;
+  width:80px;
+  height:95px;
+  background:#24152c;
+  border-radius:50% 50% 42% 42%;
+  z-index:3;
+}
+
+.doll-face{
+  position:absolute;
+  top:82px;
+  left:45px;
+  width:60px;
+  z-index:4;
+  text-align:center;
+  font-size:17px;
+}
+
+.doll-face:before{
+  content:"•     •";
+}
+
+.doll-skirt{
+  position:absolute;
+  bottom:8px;
+  left:29px;
+  width:92px;
+  height:48px;
+  background:#9bdcff;
+  border-radius:10px 10px 35px 35px;
+  z-index:2;
+}
+
+.accessory{
+  position:absolute;
+  z-index:6;
+  font-size:25px;
+}
+
+.acc-bag{right:5px;bottom:65px}
+.acc-bow{top:40px;right:23px}
+.acc-glasses{top:83px;left:43px}
+.acc-headphones{top:65px;left:22px}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.stat{
+  padding:12px;
+  background:#ffffff0c;
+  border-radius:15px;
+  text-align:center;
+}
+
+@media(max-width:700px){
+  .members{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .avatar{
+    height:155px;
+    transform:scale(.82);
+    transform-origin:bottom;
+  }
+
+  .member{
+    font-size:12px;
+  }
+
+  .card{
+    padding:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="app"></div>
+
+<script>
+"use strict";
+
+/* =========================
+   GAME DATA
+========================= */
+
+const MEMBERS=[
+  ["Daniela","#b87952","waves","#c59cff"],
+  ["Lara","#d99b78","bob","#ff9ed4"],
+  ["Manon","#c9825b","long","#ffb0c8"],
+  ["Megan","#a96845","ponytail","#8ed7ff"],
+  ["Sophia","#e0ad8c","waves","#ffe38d"],
+  ["Yoonchae","#f0c4a4","bangs","#a8efb0"]
+];
+
+const OUTFITS={
+  hair:[
+    ["Soft Waves","waves"],
+    ["Long Hair","long"],
+    ["Bob","bob"],
+    ["High Ponytail","ponytail"],
+    ["Bangs","bangs"]
+  ],
+  top:[
+    ["Pink Sweatshirt","#ff79c8"],
+    ["Lavender Hoodie","#b899ff"],
+    ["Star Sweater","#ffe38d"],
+    ["Blue Baby Tee","#8ed7ff"],
+    ["Cream Sweater","#f5e1bd"],
+    ["Black Hoodie","#29202f"]
+  ],
+  bottom:[
+    ["Baggy Jeans","#78a9df"],
+    ["Cargo Pants","#8b9b7a"],
+    ["Mini Skirt","#ff91c8"],
+    ["Wide-Leg Pants","#b89bdf"],
+    ["Pleated Skirt","#ffe38d"]
+  ],
+  shoes:[
+    ["Chunky Sneakers","👟"],
+    ["Pink Boots","🥾"],
+    ["Black Boots","🖤"],
+    ["Ballet Flats","🩰"]
+  ],
+  acc:[
+    ["Heart Bag","💗","bag"],
+    ["Bow","🎀","bow"],
+    ["Sunglasses","🕶️","glasses"],
+    ["Headphones","🎧","headphones"]
+  ]
+};
+
+const GAME={
+  chapter:1,
+  points:3,
+  energy:100,
+  trust:{Daniela:0,Yoonchae:0},
+  dress:{
+    hair:"Soft Waves",
+    top:"Pink Sweatshirt",
+    bottom:"Baggy Jeans",
+    shoes:"Chunky Sneakers",
+    acc:[]
+  }
+};
+
+try{
+  const saved=JSON.parse(localStorage.getItem("KATSEYE_CLEAN_GAME"));
+  if(saved) Object.assign(GAME,saved);
+}catch(e){}
+
+function save(){
+  localStorage.setItem("KATSEYE_CLEAN_GAME",JSON.stringify(GAME));
+}
+
+function addPoints(n){
+  GAME.points+=n;
+  save();
+}
+
+function hud(){
+  return `
+    <div class="hud">
+      <span class="pill">💎 ${GAME.points}</span>
+      <span class="pill">⚡ ${GAME.energy}</span>
+      <span class="pill">📖 Chapter ${GAME.chapter}</span>
+    </div>
+  `;
+}
+
+function show(content){
+  document.getElementById("app").innerHTML=
+    `<div class="screen">${hud()}${content}</div>`;
+}
+
+/* =========================
+   HOME
+========================= */
+
+function home(){
+
+  const people=MEMBERS.map(m=>`
+    <div class="member">
+      <div class="avatar">
+        <div class="hair ${m[2]}"></div>
+        <div class="head" style="background:${m[1]}"></div>
+        <div class="face"></div>
+        <div class="body" style="background:${m[3]}"></div>
+      </div>
+      ${m[0]}
+    </div>
+  `).join("");
+
+  show(`
+    <div class="logo">
+      <h1>KATSEYE<span class="spark">✦</span></h1>
+      <div class="subtitle">DREAM DEBUT</div>
+    </div>
+
+    <div class="home-card">
+      <div class="members">${people}</div>
+
+      <div class="menu">
+        <button class="big" onclick="menu()">💗 TOUCH TO START</button>
+      </div>
+    </div>
+  `);
+}
+
+/* =========================
+   MENU
+========================= */
+
+function menu(){
+  show(`
+    <div class="card">
+      <h2>💗 KATSEYE MENU</h2>
+
+      <div class="menu">
+        <button class="big" onclick="startGame()">🎤 PLAY STORY</button>
+        <button class="big" onclick="dressUp('hair')">👗 DRESS UP</button>
+        <button class="big secondary" onclick="rules()">📜 RULES</button>
+        <button class="big secondary" onclick="home()">🏠 HOME</button>
+      </div>
+    </div>
+  `);
+}
+
+function rules(){
+  show(`
+    <div class="card">
+      <h2>📜 RULES</h2>
+      <p>💗 Make choices and shape your debut story.</p>
+      <p>💎 Earn points from your decisions.</p>
+      <p>⚡ Keep your energy up.</p>
+      <p>👗 Customize your look whenever you want.</p>
+      <p>💾 Your progress is saved automatically.</p>
+      <button class="big" onclick="menu()">BACK</button>
+    </div>
+  `);
+}
+
+/* =========================
+   DRESS UP
+========================= */
+
+function dressUp(tab){
+
+  const items=OUTFITS[tab];
+
+  let grid="";
+
+  items.forEach(item=>{
+    const name=item[0];
+
+    let selected=false;
+
+    if(tab==="acc"){
+      selected=GAME.dress.acc.includes(name);
+    }else{
+      selected=GAME.dress[tab]===name;
+    }
+
+    grid+=`
+      <button class="item ${selected?"selected":""}"
+        onclick="chooseOutfit('${tab}',${JSON.stringify(name)})">
+        ${item[1] || ""} ${name}
+      </button>
+    `;
+  });
+
+  const hairClass={
+    "Soft Waves":"waves",
+    "Long Hair":"long",
+    "Bob":"bob",
+    "High Ponytail":"ponytail",
+    "Bangs":"bangs"
+  }[GAME.dress.hair] || "waves";
+
+  const topColor={
+    "Pink Sweatshirt":"#ff79c8",
+    "Lavender Hoodie":"#b899ff",
+    "Star Sweater":"#ffe38d",
+    "Blue Baby Tee":"#8ed7ff",
+    "Cream Sweater":"#f5e1bd",
+    "Black Hoodie":"#29202f"
+  }[GAME.dress.top] || "#ff79c8";
+
+  const bottomColor={
+    "Baggy Jeans":"#78a9df",
+    "Cargo Pants":"#8b9b7a",
+    "Mini Skirt":"#ff91c8",
+    "Wide-Leg Pants":"#b89bdf",
+    "Pleated Skirt":"#ffe38d"
+  }[GAME.dress.bottom] || "#78a9df";
+
+  const accs=GAME.dress.acc.map(a=>{
+    const found=OUTFITS.acc.find(x=>x[0]===a);
+    return found?`<span class="accessory acc-${found[2]}">${found[1]}</span>`:"";
+  }).join("");
+
+  show(`
+    <div class="card">
+
+      <h2>👗 YOUR KATSEYE LOOK</h2>
+
+      <div class="preview">
+        <div class="doll">
+
+          <div class="doll-body" style="background:${topColor}"></div>
+
+          <div class="doll-skirt"
+               style="background:${bottomColor}"></div>
+
+          <div class="doll-head"></div>
+
+          <div class="doll-hair ${hairClass}"></div>
+
+          <div class="doll-face"></div>
+
+          ${accs}
+
+        </div>
+      </div>
+
+      <div class="tabs">
+        ${Object.keys(OUTFITS).map(k=>`
+          <button class="tab ${k===tab?"active":""}"
+                  onclick="dressUp('${k}')">
+            ${k.toUpperCase()}
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="dress-grid">${grid}</div>
+
+      <div class="stats">
+        <div class="stat">💇 ${GAME.dress.hair}</div>
+        <div class="stat">👚 ${GAME.dress.top}</div>
+        <div class="stat">👖 ${GAME.dress.bottom}</div>
+        <div class="stat">👟 ${GAME.dress.shoes}</div>
+      </div>
+
+      <br>
+
+      <button class="big" onclick="menu()">💗 SAVE & BACK</button>
+
+    </div>
+  `);
+}
+
+function chooseOutfit(type,name){
+
+  if(type==="acc"){
+
+    if(GAME.dress.acc.includes(name)){
+      GAME.dress.acc=GAME.dress.acc.filter(x=>x!==name);
+    }else if(GAME.dress.acc.length<4){
+      GAME.dress.acc.push(name);
+    }
+
+  }else{
+    GAME.dress[type]=name;
+  }
+
+  save();
+  dressUp(type);
+}
+
+/* =========================
+   STORY
+========================= */
+
+function startGame(){
+  GAME.chapter=1;
+  GAME.points=3;
+  GAME.energy=100;
+  GAME.trust={Daniela:0,Yoonchae:0};
+  save();
+  chapter1();
+}
+
+function result(text,next){
+  show(`
+    <div class="card">
+      <div class="result">${text}</div>
+      <button class="big" onclick="${next}">CONTINUE ›</button>
+    </div>
+  `);
+}
+
+function chapter1(){
+  show(`
+    <div class="card">
+      <h2>🌅 CHAPTER 1 — DEBUT DAY</h2>
+      <p>YOU GOT SELECTED TO DEBUT WITH KATSEYE!</p>
+      <p>Your first practice starts at 7:00 AM.</p>
+      <h3>⏰ When do you wake up?</h3>
+
+      <div class="choices">
+        <button class="choice" onclick="wake(-2)">6:50 AM</button>
+        <button class="choice" onclick="wake(-1)">6:30 AM</button>
+        <button class="choice" onclick="wake(-1)">4:00 AM</button>
+        <button class="choice" onclick="wake(2)">5:00 AM</button>
+      </div>
+    </div>
+  `);
+}
+
+function wake(n){
+  addPoints(n);
+  result(
+    n>0?"🌟 Great timing! +2 points":"⏰ Your morning could have gone better…",
+    "practiceOutfit"
+  );
+}
+
+function practiceOutfit(){
+  show(`
+    <div class="card">
+      <h2>👚 PRACTICE OUTFIT</h2>
+      <p>Choose what you would wear to rehearsal.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="outfitChoice(-2)">Huge coat + beach sandals</button>
+        <button class="choice" onclick="outfitChoice(-1)">Pajamas + slippers</button>
+        <button class="choice" onclick="outfitChoice(-1)">Super sparkly stage look</button>
+        <button class="choice" onclick="outfitChoice(2)">Cute comfy practice fit</button>
+      </div>
+    </div>
+  `);
+}
+
+function outfitChoice(n){
+  addPoints(n);
+  result(
+    n>0?"💜 Perfect practice fit! +2":"😅 Interesting choice…",
+    "breakfast"
+  );
+}
+
+function breakfast(){
+  show(`
+    <div class="card">
+      <h2>🥞 BREAKFAST</h2>
+
+      <div class="choices">
+        <button class="choice" onclick="meal(2)">🍳 Full breakfast</button>
+        <button class="choice" onclick="meal(1)">🍓 Quick fruit</button>
+        <button class="choice" onclick="meal(-1)">☕ Just coffee</button>
+      </div>
+    </div>
+  `);
+}
+
+function meal(n){
+  GAME.energy=Math.max(0,Math.min(100,GAME.energy+n*8));
+  save();
+
+  result(
+    n>0?"⚡ Energy restored!":"😵 Energy is low…",
+    "practice"
+  );
+}
+
+function practice(){
+  show(`
+    <div class="card">
+      <h2>🕖 7:00 PRACTICE</h2>
+      <p>The music starts.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="practiceChoice(2)">Stay focused and match formation</button>
+        <button class="choice" onclick="practiceChoice(-1)">Rush the next move</button>
+        <button class="choice" onclick="practiceChoice(1)">Encourage the team while dancing</button>
+      </div>
+    </div>
+  `);
+}
+
+function practiceChoice(n){
+  addPoints(n);
+  GAME.chapter=2;
+  save();
+
+  result(
+    n>0?"💃 Strong team moment!":"😅 Recover on the next count.",
+    "chapter2"
+  );
+}
+
+function chapter2(){
+  show(`
+    <div class="card">
+      <h2>💗 CHAPTER 2 — THE TRUST TEST</h2>
+      <p>Daniela asks you to organize rehearsal notes.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="daniela(-2)">Ignore the notes</button>
+        <button class="choice" onclick="daniela(-1)">Help a little but rush</button>
+        <button class="choice" onclick="daniela(1)">Organize everything carefully</button>
+      </div>
+    </div>
+  `);
+}
+
+function daniela(n){
+  GAME.trust.Daniela+=n;
+  save();
+
+  result(
+    n>0?"💗 Daniela trusts you a little more!":"💬 Trust takes time.",
+    "yoonchaeQuest"
+  );
+}
+
+function yoonchaeQuest(){
+  show(`
+    <div class="card">
+      <h2>💚 YOONCHAE'S SIDE QUEST</h2>
+      <p>Help prepare the practice room.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="yoonchae(-2)">Leave it for her</button>
+        <button class="choice" onclick="yoonchae(-1)">Help for a few minutes</button>
+        <button class="choice" onclick="yoonchae(1)">Stay and finish together</button>
+      </div>
+    </div>
+  `);
+}
+
+function yoonchae(n){
+  GAME.trust.Yoonchae+=n;
+  GAME.chapter=3;
+  save();
+
+  result(
+    n>0?"💚 Yoonchae smiles.":"💬 Trust takes time.",
+    "chapter3"
+  );
+}
+
+function chapter3(){
+  show(`
+    <div class="card">
+      <h2>🎤 CHAPTER 3 — FIRST PERFORMANCE</h2>
+      <p>A stage problem appears right before the show.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="stage(2)">Stay calm and help reset</button>
+        <button class="choice" onclick="stage(-2)">Panic and blame someone</button>
+        <button class="choice" onclick="stage(-1)">Freeze for a moment</button>
+        <button class="choice" onclick="stage(1)">Smile and keep formation moving</button>
+      </div>
+    </div>
+  `);
+}
+
+function stage(n){
+  addPoints(n);
+  GAME.chapter=4;
+  save();
+
+  result(
+    n>0?"🎤 You handled the stage problem!":"🎤 The show goes on…",
+    "chapter4"
+  );
+}
+
+function chapter4(){
+  show(`
+    <div class="card">
+      <h2>💜 CHAPTER 4 — THE EMPTY SPOTLIGHT</h2>
+      <p>The concert starts. Manon is on hiatus and fans notice the empty spot.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="concert(1)">Encourage the team and keep smiling</button>
+        <button class="choice" onclick="concert(-1)">Keep staring at the empty spot</button>
+        <button class="choice" onclick="concert(-2)">Panic during the performance</button>
+      </div>
+    </div>
+  `);
+}
+
+function concert(n){
+  addPoints(n);
+  result(
+    n>0?"💗 Your support helped the team.":"💭 That was a difficult moment.",
+    "interview"
+  );
+}
+
+function interview(){
+  show(`
+    <div class="card">
+      <h2>🎙️ FAN & NEWS INTERVIEWS</h2>
+
+      <div class="choices">
+        <button class="choice" onclick="interviewChoice(-2)">Shout answers at everyone</button>
+        <button class="choice" onclick="interviewChoice(-1)">Stay completely silent</button>
+        <button class="choice" onclick="interviewChoice(-1)">Make up an answer</button>
+        <button class="choice" onclick="interviewChoice(1)">Ask for privacy and space</button>
+      </div>
+    </div>
+  `);
+}
+
+function interviewChoice(n){
+  addPoints(n);
+  result(
+    n>0?"💗 You handled the questions thoughtfully.":"😶 The questions were overwhelming.",
+    "backstage"
+  );
+}
+
+function backstage(){
+  show(`
+    <div class="card">
+      <h2>🎭 BACKSTAGE</h2>
+      <p>Megan: “This space feels so empty with Manon.”</p>
+      <p>Lara looks worried.</p>
+      <p>Yoonchae stays quiet.</p>
+      <p>Daniela asks what everyone should do.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="backstageChoice(1)">Talk about Manon together</button>
+        <button class="choice" onclick="backstageChoice(0)">Give everyone some space</button>
+        <button class="choice" onclick="backstageChoice(1)">Leave a note for Manon</button>
+        <button class="choice" onclick="backstageChoice(1)">Cheer everyone up and practice</button>
+      </div>
+    </div>
+  `);
+}
+
+function backstageChoice(n){
+  addPoints(n);
+  GAME.chapter=5;
+  save();
+
+  result("💗 The team gets through the night.","chapter5");
+}
+
+function chapter5(){
+  show(`
+    <div class="card">
+      <h2>📱 CHAPTER 5 — THE COMMENTS</h2>
+      <p>Daniela sees supportive comments, hateful comments, and “WHERE IS MANON?” posts.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="social(-1)">Keep scrolling and read everything</button>
+        <button class="choice" onclick="social(1)">Put the phone away and talk to the members</button>
+        <button class="choice" onclick="social(-1)">Reply to comments yourself</button>
+        <button class="choice" onclick="social(1)">Talk with everyone about the posts</button>
+      </div>
+    </div>
+  `);
+}
+
+function social(n){
+  addPoints(n);
+  result(
+    n>0?"💗 You chose the team over the noise.":"📱 The comments got to you.",
+    "song"
+  );
+}
+
+function song(){
+  show(`
+    <div class="card">
+      <h2>🎵 NEW SONG DAY</h2>
+      <p>A new fictional KATSEYE song drops.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="songChoice(1)">💃 Join the dance challenge</button>
+        <button class="choice" onclick="songChoice(0)">👀 Watch first</button>
+        <button class="choice" onclick="songChoice(-1)">📱 Read hateful comments</button>
+      </div>
+    </div>
+  `);
+}
+
+function songChoice(n){
+  addPoints(n);
+  result("💃 The dance challenge begins!","dressChallenge");
+}
+
+function dressChallenge(){
+  show(`
+    <div class="card">
+      <h2>👗 QUICK DRESS-UP CHALLENGE</h2>
+      <p>Create your look before the performance.</p>
+
+      <button class="big" onclick="dressUp('hair')">OPEN YOUR CLOSET</button>
+      <br><br>
+      <button class="big secondary" onclick="performance()">SKIP TO PERFORMANCE ›</button>
+    </div>
+  `);
+}
+
+function performance(){
+  show(`
+    <div class="card">
+      <h2>🎬 3… 2… 1… RECORD!</h2>
+      <p>The camera starts rolling.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="views(2)">Hit every move</button>
+        <button class="choice" onclick="views(1)">Smile and keep it simple</button>
+        <button class="choice" onclick="views(-1)">Miss a count but recover</button>
+      </div>
+    </div>
+  `);
+}
+
+function views(n){
+  addPoints(n);
+  GAME.chapter=6;
+  save();
+
+  result("📈 The upload is climbing!","chapter6");
+}
+
+function chapter6(){
+  show(`
+    <div class="card">
+      <h2>💌 CHAPTER 6 — THE CALL</h2>
+      <p>Manon calls the girls.</p>
+      <p>“Hey girls… I've been watching everything. I miss you all. 💗 I think I'm ready to talk.”</p>
+
+      <div class="choices">
+        <button class="choice" onclick="callChoice(1)">Tell her you missed her</button>
+        <button class="choice" onclick="callChoice(0)">Let her speak first</button>
+        <button class="choice" onclick="callChoice(1)">Say you're happy to hear from her</button>
+        <button class="choice" onclick="callChoice(-1)">Immediately demand answers</button>
+      </div>
+    </div>
+  `);
+}
+
+function callChoice(n){
+  addPoints(n);
+  result("💗 The conversation feels gentle.","reunion");
+}
+
+function reunion(){
+  show(`
+    <div class="card">
+      <h2>🤍 SHE'S BACK</h2>
+      <p>The girls finally meet Manon again.</p>
+      <p>Everyone hugs. The team listens as she explains that she needed time away from the pressure.</p>
+
+      <div class="choices">
+        <button class="choice" onclick="mall()">🛍️ Go to the mall together</button>
+        <button class="choice" onclick="mall()">💗 Stay together a little longer</button>
+      </div>
+    </div>
+  `);
+}
+
+function mall(){
+  show(`
+    <div class="card">
+      <h2>🛍️ MALL DAY</h2>
+      <p>Quick shopping challenge!</p>
+
+      <div class="choices">
+        <button class="choice" onclick="shop(1)">Pink sweater dress + boots</button>
+        <button class="choice" onclick="shop(1)">Oversized sweatshirt + baggy jeans</button>
+        <button class="choice" onclick="shop(0)">Graphic tee + skirt</button>
+      </div>
+    </div>
+  `);
+}
+
+function shop(n){
+  addPoints(n);
+  GAME.chapter=7;
+  save();
+
+  result("🛍️ Shopping challenge complete!","chapter7");
+}
+
+function chapter7(){
+  show(`
+    <div class="card">
+      <h2>🌟 CHAPTER 7 — ONE LAST PERFORMANCE</h2>
+      <p>Manon returns for one last performance with the girls.</p>
+      <p><b>“I couldn't miss one last performance with my girls.”</b></p>
+
+      <div class="choices">
+        <button class="choice" onclick="finale(2)">Trust the team and hit every count</button>
+        <button class="choice" onclick="finale(1)">Smile, breathe, and dance your heart out</button>
+        <button class="choice" onclick="finale(-1)">Rush the hardest rhythm</button>
+      </div>
+    </div>
+  `);
+}
+
+function finale(n){
+  addPoints(n);
+
+  show(`
+    <div class="card">
+      <h1 style="text-align:center">🌟 SEASON 1 FINALE 🌟</h1>
+
+      <h2 style="text-align:center">THE FINAL PERFORMANCE</h2>
+
+      <p>
+        Daniela, Lara, Manon, Megan, Sophia, Yoonchae —
+        and you — finish the final move together.
+      </p>
+
+      <p style="text-align:center;font-size:22px">
+        🎤 KATSEYE: DREAM DEBUT
+      </p>
+
+      <div class="result">
+        FINAL POINTS: ${GAME.points}
+      </div>
+
+      <button class="big" onclick="dressUp('hair')">
+        👗 VIEW YOUR LOOK
+      </button>
+
+      <br><br>
+
+      <button class="big secondary" onclick="menu()">
+        🏠 MENU
+      </button>
+    </div>
+  `);
+}
+
+/* =========================
+   START
+========================= */
+
+home();
+
+</script>
+</body>
+</html>
