@@ -10,25 +10,25 @@
 .hud{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}.pill{background:#ffffff1d;border:1px solid #ffffff33;border-radius:99px;padding:7px 11px;font-weight:800}
 .title{text-align:center;font-size:clamp(38px,9vw,76px);letter-spacing:5px;margin:18px 0 0}.sub{text-align:center;opacity:.85}
 .members{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:25px auto;max-width:900px}.member{text-align:center;font-weight:800}.avatar{height:200px;position:relative;display:flex;align-items:end;justify-content:center;animation:bob 1.2s infinite alternate}.body{width:68px;height:110px;border-radius:38px 38px 16px 16px}.head{position:absolute;top:38px;width:68px;height:70px;background:#ffd4bf;border-radius:50%;z-index:2;border:2px solid #63365e}..hair{position:absolute;top:17px;width:80px;height:78px;background:#24152c;border-radius:48% 52% 35% 35%;z-index:3}
-.hair.bob{width:72wpx;height:70px;border-radius:48% 52% 38% 38%}
-.hair.ponytail:after{content:"";position:absolute;right:-24px;top:8px;width:34px;height:65px;background:#24152c;border-radius:50%}
+.hair.bob{width:72px;height:70px;border-radius:48% 52% 38% 38%}
+..hair.ponytail:after{content:"";position:absolute;right:-10px;top:12px;width:22px;height:48px;background:#24152c;border-radius:50%}0px;width:28px;height:55px;background:#24152c;border-radius:50%}
 .hair.waves{height:82px;border-radius:55% 45% 45% 40%}
 .hair.bangs:before{content:"";position:absolute;left:8px;right:8px;bottom:26px;height:30px;background:#24152c;border-radius:0 0 45% 45%}
 .hair.curls{height:84px;border-radius:45% 55% 50% 45%;box-shadow:8px 8px 0 #24152c,-8px 10px 0 #24152c}
 .hair.twintails:before,.hair.twintails:after{content:"";position:absolute;top:18px;width:25px;height:62px;background:#24152c;border-radius:50%}
 .hair.twintails:before{left:-18px}
-.hair.twintails:after{right:-18px}.face{position:absolute;z-index:4;top:64px;width:54px;height:25px}.face:before,.face:after{content:"•";position:absolute;font-size:18px}.face:before{left:8px}.face:after{right:8px}
+.hair.twintails:after{right:-18px}
+.face{position:absolute;z-index:4;top:64px;width:54px;height:25px}.face:before,.face:after{content:"•";position:absolute;font-size:18px}.face:before{left:8px}.face:after{right:8px}
 .menu,.choices{display:grid;gap:11px;max-width:600px;margin:25px auto}.big,.choice{border-radius:18px;padding:16px 18px;font-weight:850;text-align:left}.big{background:#ffffff1c;border:2px solid #ffffff44}.choice{background:white;color:#2a103d}.choice:active,.big:active{transform:scale(.98)}
 .card{background:#140b27e8;border:1px solid #ffffff2c;border-radius:24px;padding:22px;max-width:820px;margin:28px auto}.card h2{margin-top:0}.result{text-align:center;background:#ffffff18;border-radius:16px;padding:16px;font-weight:900;font-size:19px;margin-bottom:12px}
 .tabs{display:flex;gap:7px;overflow:auto;margin:12px 0}.tab{background:#ffffff18;padding:9px 12px;border-radius:99px;white-space:nowrap}.active{background:#ff79c9;color:#290936}.dressgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.item{background:#ffffff12;color:white;border:1px solid #ffffff25;border-radius:15px;padding:12px}.selected{outline:3px solid #ff8bd3}
-.preview{height:175px;border-radius:20px;background:linear-gradient(135deg,#f5b8ff,#7567ff);display:grid;place-items:center}.player{width:78px;height:115px;background:linear-gradient(#ffacd8,#9bdcff);border-radius:40px 40px 18px 18px;position:relative}.player:before{content:"";position:absolute;width:70px;height:70px;background:#ffd3be;border-radius:50%;top:-44px;left:4px}
-.small{opacity:.75}.footer{text-align:center;opacity:.7;margin-top:18px}@keyframes bob{to{transform:translateY(-8px) rotate(2deg)}}
+.preview{height:175px;border-radius:20px;background:linear-gradient(135deg,#f5b8ff,#7567ff);display:grid;place-items:center}.player{width:78px;height:115px;background:linear-gradient(#ffacd8,#9bdcff);border-radius:40px 40px 18px 18px;position:relative}..player:before{content:"";position:absolute;width:70px;height:70px;background:#ffd3be;border-radius:50%;top:-52px;left:4px}
 @media(max-width:700px){.members{grid-template-columns:repeat(3,1fr)}.avatar{height:155px;transform:scale(.8)}.dressgrid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body><div id="app"></div>
 <script>
-const  M=[["Daniela","#c59cff","waves"],["Lara","#ff9ed4","bob"],["Manon","#ffb0c8","long"],["Megan","#8ed7ff","ponytail"],["Sophia","#ffe38d","waves"],["Yoonchae","#a8efb0","bangs"]];
+const  M=[["Daniela","#c59cff","waves","#b87952"],["Lara","#ff9ed4","bob","#d99b78"],["Manon","#ffb0c8","long","#c9825b"],["Megan","#8ed7ff","ponytail","#a96845"],["Sophia","#ffe38d","waves","#e0ad8c"] ["Yoonchae","#a8efb0","bangs","#f0c4a4"]];
 const S={chapter:1,points:3,energy:100,trust:{Daniela:0,Yoonchae:0},dress:{hair:"Soft Waves",top:"Pink Sweatshirt",bottom:"Baggy Jeans",shoes:"Chunky Sneakers",acc:[]}};
 try{Object.assign(S,JSON.parse(localStorage.getItem("KATSEYE_GAME")||"{}"))}catch(e){}
 function save(){localStorage.setItem("KATSEYE_GAME",JSON.stringify(S))}
@@ -36,7 +36,7 @@ function add(n){S.points+=n;save()}
 function hud(){return `<div class="hud"><span class="pill">💎 ${S.points}</span><span class="pill">⚡ ${S.energy}</span><span class="pill">📖 Chapter ${S.chapter}</span></div>`}
 function show(x){document.getElementById("app").innerHTML=`<div class="screen">${hud()}${x}</div>`}
 function result(t,next){show(`<div class="card"><div class="result">${t}</div><button class="big" onclick="${next}">CONTINUE ›</button></div>`)}
-function home(){show(`<h1 class="title">KATSEYE</h1><div class="sub">DREAM DEBUT ✦</div><div class="members">${M.map(m=>`<div class="member"><div class="avatar"><div class="hair ${m[2]}"></div><div class="head"></div><div class="face"></div><div class="body" style="background:linear-gradient(135deg,${m[1]},#fff)"></div></div>${m[0]}</div>`).join("")}</div><div class="menu"><button class="big" onclick="menu()">💗 TOUCH TO START</button></div>`)}
+function home(){show(`<h1 class="title">KATSEYE</h1><div class="sub">DREAM DEBUT ✦</div><div class="members">${M.map(m=>`<div class="member"><div class="avatar"><div class="hair ${m[2]}"></div><div class="head" style="background:${m[3]}"></div>class="face"></div><div class="body" style="background:${m[1]};border:none;box-shadow:none"></div>,#fff)"></div></div>${m[0]}</div>`).join("")}</div><div class="menu"><button class="big" onclick="menu()">💗 TOUCH TO START</button></div>`)}
 function menu(){show(`<h1 class="title">MENU</h1><div class="menu"><button class="big" onclick="start()">① PLAY</button><button class="big" onclick="you('hair')">② YOU — DRESS UP</button><button class="big" onclick="rules()">③ RULES</button></div>`)}
 function rules(){show(`<div class="card"><h2>📜 RULES</h2><p>💗 Be kind to every member and crowd.</p><p>⏰ Practice starts at sharp 7.</p><p>🎤 Enjoy the game.</p><p>✨ Follow the rules.</p><button class="big" onclick="menu()">BACK</button></div>`)}
 const DATA={hair:["Soft Waves","Long Straight","High Ponytail","Low Ponytail","Bob","Space Buns","Braids","Half-Up","Curly","Pink Waves","Blue Bob","Purple Long"],top:["Pink Sweatshirt","Lavender Hoodie","Star Sweater","Graphic Tee","Denim Jacket","Baby Tee","Cream Sweater","Black Hoodie"],bottom:["Baggy Jeans","Cargo Pants","Mini Skirt","Denim Shorts","Wide-Leg Pants","Pleated Skirt"],dress:["Pink Sweater Dress","Lavender Sweater Dress","Sparkle Dress","Cream Knit Dress"],shoes:["Chunky Sneakers","High-Top Sneakers","Black Boots","Pink Boots","Knee-High Boots","Platform Boots","Ballet Flats","Cute Heels"],acc:["Heart Bag","Star Clips","Sunglasses","Pearl Necklace","Bow","Headphones","Mini Backpack","Charm Bracelet","Hair Ribbon","Glitter Bag"]};
