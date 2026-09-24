@@ -549,33 +549,85 @@ function show(content){
 
 function home(){
 
-  const people=MEMBERS.map(m=>`
-    <div class="member">
+  const people = MEMBERS.map((m,i)=>`
+    <div class="cover-member cover-${i}">
+
+      <div class="member-name">${m[0]}</div>
+
       <div class="avatar">
         <div class="hair ${m[2]}"></div>
+        <div class="cover-bangs"></div>
         <div class="head" style="background:${m[1]}"></div>
         <div class="face"></div>
         <div class="body" style="background:${m[3]}"></div>
       </div>
-      ${m[0]}
+
     </div>
   `).join("");
 
   show(`
-    <div class="logo">
-      <h1>KATSEYE<span class="spark">✦</span></h1>
-      <div class="subtitle">DREAM DEBUT</div>
-    </div>
+    <style>
 
-    <div class="home-card">
-      <div class="members">${people}</div>
+      .cover-screen{
+        min-height:calc(100vh - 36px);
+        position:relative;
+        overflow:hidden;
+        border-radius:28px;
+        padding:22px 12px 18px;
+        text-align:center;
+        background:
+          radial-gradient(circle at 50% 25%,rgba(255,150,255,.32),transparent 32%),
+          linear-gradient(145deg,#24113d,#6d3b91 52%,#1b102b);
+      }
 
-      <div class="menu">
-        <button class="big" onclick="menu()">💗 TOUCH TO START</button>
-      </div>
-    </div>
-  `);
-}
+      .cover-title{
+        position:relative;
+        z-index:20;
+      }
+
+      .cover-title h1{
+        margin:5px 0 0;
+        font-family:Georgia,serif;
+        font-size:clamp(42px,9vw,78px);
+        letter-spacing:4px;
+        color:white;
+        text-shadow:0 0 20px #f3b8ff;
+      }
+
+      .cover-subtitle{
+        color:#ffb9eb;
+        font-size:24px;
+        font-style:italic;
+        margin-top:-8px;
+      }
+
+      .cover-song{
+        display:inline-block;
+        margin-top:8px;
+        padding:7px 18px;
+        border-radius:20px;
+        background:rgba(255,255,255,.12);
+        border:1px solid rgba(255,255,255,.25);
+        font-size:12px;
+        letter-spacing:2px;
+      }
+
+      .cover-members{
+        position:relative;
+        height:430px;
+        max-width:900px;
+        margin:5px auto 0;
+      }
+
+      .cover-member{
+        position:absolute;
+        bottom:0;
+        width:135px;
+        height:390px;
+      }
+
+      .cover-0{left:2%;transform:rotate(-7deg);}
+      .cover-1{left:
 
 /* =========================
    MENU
